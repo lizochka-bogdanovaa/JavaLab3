@@ -15,7 +15,7 @@ class Passenger extends Thread {
     public void run() {
         try {
             elevator.enter(passengerId);
-            //Thread.sleep((long) (Math.random() * 1000)); // Имитация времени, проведенного в лифте
+            Thread.sleep((long) (Math.random() * 1000)); // Имитация времени, проведенного в лифте
             elevator.exit(passengerId);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

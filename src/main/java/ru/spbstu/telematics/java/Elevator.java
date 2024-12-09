@@ -4,11 +4,12 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class Elevator {
+class Elevator extends Thread {
     static final int MAX_CAPACITY = 10;
     private int currentLoad = 0;
     final Lock lock = new ReentrantLock();
     private final Semaphore semaphore = new Semaphore(MAX_CAPACITY);
+    private boolean isRunning = true;
 
     public void enter(int passengerId) throws InterruptedException {
         semaphore.acquire();
@@ -36,5 +37,21 @@ class Elevator {
 
     public int getCurrentLoad() {
         return currentLoad;
+    }
+
+    public void stopElevator() {
+        isRunning = false;
+    }
+
+    @Override
+    public void run() {
+        while (isRunning) {
+            try {
+                Thread.sleep(100); // имитация работы лифта
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println("Лифт остановился.");
     }
 }
