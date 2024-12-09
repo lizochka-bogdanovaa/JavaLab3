@@ -5,9 +5,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 class Elevator {
-    private static final int MAX_CAPACITY = 10;
+    static final int MAX_CAPACITY = 10;
     private int currentLoad = 0;
-    private final Lock lock = new ReentrantLock();
+    final Lock lock = new ReentrantLock();
     private final Semaphore semaphore = new Semaphore(MAX_CAPACITY);
 
     public void enter(int passengerId) throws InterruptedException {
@@ -32,5 +32,9 @@ class Elevator {
         } finally {
             lock.unlock();
         }
+    }
+
+    public int getCurrentLoad() {
+        return currentLoad;
     }
 }
