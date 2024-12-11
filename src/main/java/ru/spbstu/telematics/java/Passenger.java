@@ -1,8 +1,6 @@
 package ru.spbstu.telematics.java;
 
-import java.util.concurrent.CountDownLatch;
-
-class Passenger extends Thread {
+class Passenger implements Runnable {
     private final int passengerId;
     private final Elevator elevator;
 

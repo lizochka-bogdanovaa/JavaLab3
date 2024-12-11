@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ElevatorTest {
-
     @Test
     void testElevatorConcurrency() throws InterruptedException {
         Elevator elevator = new Elevator();
@@ -32,12 +31,10 @@ public class ElevatorTest {
                 }
             });
         }
-
         latch.await(10, TimeUnit.SECONDS);
         executor.shutdown();
         assertTrue(executor.awaitTermination(5, TimeUnit.SECONDS), "");
         assertEquals(0, elevator.getCurrentLoad(), "Загруженность лифта не 0, после того как все пассажиры вышли");
-
     }
 
     private int getCurrentLoad(Elevator elevator){
@@ -48,7 +45,6 @@ public class ElevatorTest {
             elevator.lock.unlock();
         }
     }
-
 
     @Test
     void testElevatorMaxCapacity() throws InterruptedException {
@@ -72,5 +68,4 @@ public class ElevatorTest {
         assertTrue(getCurrentLoad(elevator) <= Elevator.MAX_CAPACITY,
                 "Больше, чем 10 пассажиров зашли в лифт: " + getCurrentLoad(elevator));
     }
-
 }

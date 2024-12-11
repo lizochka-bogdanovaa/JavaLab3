@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class Elevator extends Thread {
+class Elevator implements Runnable{
     static final int MAX_CAPACITY = 10;
     private int currentLoad = 0;
     final Lock lock = new ReentrantLock();
