@@ -1,7 +1,6 @@
 package ru.spbstu.telematics.java;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,7 +51,7 @@ public class ElevatorTest {
         ExecutorService executor = Executors.newFixedThreadPool(25);
         CountDownLatch latch = new CountDownLatch(25);
         for (int i = 0; i < 25; i++) {
-            int finalI = i; // Не забудьте об этом!
+            int finalI = i;
             executor.submit(() -> {
                 try {
                     elevator.enter(finalI);
@@ -64,7 +63,6 @@ public class ElevatorTest {
         }
         latch.await(10, TimeUnit.SECONDS);
         executor.shutdown();
-        // Проверяем, что в лифте не более MAX_CAPACITY пассажиров
         assertTrue(getCurrentLoad(elevator) <= Elevator.MAX_CAPACITY,
                 "Больше, чем 10 пассажиров зашли в лифт: " + getCurrentLoad(elevator));
     }
